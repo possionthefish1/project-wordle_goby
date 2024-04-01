@@ -1,6 +1,11 @@
 /*
   Theme and global variables
 */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   overflow-y: scroll;
 
@@ -171,6 +176,7 @@ h1 {
   margin: 0 auto;
   padding: 32px;
   text-align: center;
+  -webkit-animation: slideUp 750ms cubic-bezier(0, 0.72, 0.24, 1.02);
   animation: slideUp 750ms cubic-bezier(0, 0.72, 0.24, 1.02);
   border-radius: 4px 4px 0px 0px;
   will-change: transform;
@@ -222,6 +228,14 @@ h1 {
 /*
   Keyframe animations
 */
+@-webkit-keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
 @keyframes slideUp {
   from {
     transform: translateY(100%);

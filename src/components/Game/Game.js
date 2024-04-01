@@ -1,4 +1,6 @@
 import React from 'react';
+import Input from '../Input';
+import WrongGuesses from '../WrongGuesses/WrongGuesses';
 
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
@@ -9,7 +11,25 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  return <>Put a game here!</>;
+  const [oldGuesses, setOldGuesses] = React.useState([
+    { key: crypto.randomUUID(), value: 'APPLE' },
+    { key: crypto.randomUUID(), value: 'REACT' },
+  ]);
+
+  const handleAddGuess = (value) => {
+    const newOld = {
+      key: crypto.randomUUID(),
+      value,
+    };
+    setOldGuesses([...oldGuesses, newOld]);
+  };
+
+  return (
+    <>
+      <WrongGuesses oldGuesses={oldGuesses} />
+      <Input handleSubmit={handleAddGuess} />
+    </>
+  );
 }
 
 export default Game;
