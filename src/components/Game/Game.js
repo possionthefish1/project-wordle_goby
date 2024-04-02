@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Input from '../Input';
-import WrongGuesses from '../WrongGuesses/WrongGuesses';
+import WrongGuesses from '../WrongGuesses';
+import Banner from '../Banner';
 
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
@@ -11,10 +13,9 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [oldGuesses, setOldGuesses] = React.useState([
-    { key: crypto.randomUUID(), value: 'APPLE' },
-    { key: crypto.randomUUID(), value: 'REACT' },
-  ]);
+  const [oldGuesses, setOldGuesses] = React.useState([]);
+  // 'playing' state here won, lose (banner)
+  const [gameState, setGameState] = React.useState('playing');
 
   const handleAddGuess = (value) => {
     const newOld = {
@@ -26,8 +27,9 @@ function Game() {
 
   return (
     <>
-      <WrongGuesses oldGuesses={oldGuesses} />
+      <WrongGuesses oldGuesses={oldGuesses} answer={answer} />
       <Input handleSubmit={handleAddGuess} />
+      {gameState !== 'playing' ? <Banner /> : undefined}
     </>
   );
 }

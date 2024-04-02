@@ -5,6 +5,7 @@ function Input({ handleSubmit }) {
 
   return (
     <form
+      className='guess-input-wrapper'
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(guess);
@@ -12,19 +13,18 @@ function Input({ handleSubmit }) {
       }}
     >
       <label htmlFor='guess'>Enter guess:</label>
-      <br />
       <input
-        className=' border border-black focus:ring-4 rounded'
+        className='focus:ring-8'
         type='text'
         id='guess'
         required={true}
         value={guess}
         maxLength={5}
-        pattern={'[A-Z]{5}'}
+        pattern={'[a-zA-Z]{5}'}
         title={'5 letters guess only, no numbers or special character allowed'}
         onChange={(e) => {
-          const nextGuess = e.target.value;
-          setGuess(nextGuess.toUpperCase());
+          const nextGuess = e.target.value.toUpperCase();
+          setGuess(nextGuess);
         }}
       />
     </form>
